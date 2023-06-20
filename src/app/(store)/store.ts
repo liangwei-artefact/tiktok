@@ -3,6 +3,7 @@ import {create} from 'zustand';
 import {RowData} from './types'
 import { AccountsRequest } from "../api/type/accounts";
 import {getCurrentDate} from '../utils/dateUtil'
+import { AccountReportRequest } from '../api/type/accounts';
 
 interface AccountsState {
     rowData: RowData[]
@@ -76,6 +77,38 @@ export const useAccountsRequestStore = create<AccountsRequestState>(
         }
     })
 )
+
+
+
+interface AccountReportRequestState {
+    accountReportRequest: AccountReportRequest
+    setDateRange: (dateRange: string) => void
+    setAccountName: (accountName: string) => void
+}
+
+
+export const useAccountReportRequestStore = create<AccountReportRequestState>(
+    (set) => ({
+        accountReportRequest: { accountName: '', dt: parseInt(getCurrentDate()), recentDays: 1 },
+        setDateRange: (dateRange) => {
+            set((state) => {
+                return {
+                    accountReportRequest: {...state.accountReportRequest, recentDays: parseInt(dateRange)}
+                }
+            })
+        },
+        setAccountName: (accountName) => {
+            set((state) => {
+                return {
+                    accountReportRequest: {...state.accountReportRequest, accountName: accountName}
+                }
+            })
+        }
+    })
+)
+
+
+
 
 
 export default useAccountsStore;

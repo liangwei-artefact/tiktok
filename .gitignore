@@ -33,3 +33,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.idea
+/src/app/icons/Chat2DB-1.0.10-arm64.dmg
