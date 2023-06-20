@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { Box, Link } from '@mui/material';
-import { useRouter,usePathname, useSearchParams } from 'next/navigation';
+import { useRouter,usePathname } from 'next/navigation';
 
 
 export default function AccountsDetailBreadcrumbs() {
-    const router = useRouter();
+    const pathName =  usePathname();
     function generateBreadcrumbs() {
-        const pathName =  usePathname();
+        
         console.log("pathName:",pathName);
         // Remove any query parameters, as those aren't included in breadcrumbs
 

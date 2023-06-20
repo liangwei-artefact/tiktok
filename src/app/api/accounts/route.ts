@@ -1,36 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Client} from "@elastic/elasticsearch";
-import { AccountsRequest,AccountsResponse,AccountInfo,AccountsRow } from "../type/accounts";
+import { AccountsRequest,AccountsResponse,AccountInfo,AccountsRow,AccountsDocument } from "../type/accounts";
 
 
 const client = new Client({ node: 'http://34.66.66.126:9200' });
 
-interface AccountsDocument {
-    account_ads_spend: string;
-    account_avatar_image: string;
-    account_cnt_ads_click: number;
-    account_cnt_ads_count: number;
-    account_cnt_ads_gmv: number;
-    account_cnt_follower: number;
-    account_cnt_livestream: number;
-    account_cnt_posted_video: number;
-    account_cnt_profile_visited: number;
-    account_cnt_sales_orders: number;
-    account_cnt_video_views: number;
-    account_duration_livestream: number;
-    account_gpv: number;
-    account_id: string;
-    account_livestream_gmv: string;
-    account_name: string;
-    account_region: string;
-    account_return_value: number;
-    account_video_gmv: string;
-    brand_name: string;
-    cir: number;
-    dt: number;
-    is_brand: boolean;
-    recent_days: number;
-}
+
 
 export async function GET() {
     const result:any = await client.search<AccountsDocument>({
@@ -54,7 +29,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const {accountsRequest} =  await req.json();
-  console.log(JSON.stringify(accountsRequest))
+  // console.log(JSON.stringify(accountsRequest))
   const searchBody = []
   // build searchBody
   if ('brand' in accountsRequest && accountsRequest.brand != 'ALL Brands') {
@@ -79,7 +54,7 @@ export async function POST(req: Request) {
     })
 }
 
-  console.log(JSON.stringify(searchBody))
+  // console.log(JSON.stringify(searchBody))
   const result = await client.search<AccountsDocument>({
       index: 'ads_account',
       query: {
