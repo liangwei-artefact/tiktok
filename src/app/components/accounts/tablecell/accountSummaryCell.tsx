@@ -1,5 +1,10 @@
 import Box from '@mui/material/Box';
-import { GridRenderCellParams } from '@mui/x-data-grid';
+import { Grid } from '@mui/material';
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { AccountSummary }  from '../../../type/accounts-page'
 import Image from 'next/image';
 import AccountOfficial from '../../../icons/AccountOfficial.svg'
@@ -9,6 +14,8 @@ import Link from 'next/link';
 
 export default function AccountSummaryCell(props: GridRenderCellParams<any, AccountSummary>) {
     const { value } = props;
+    // console.log(JSON.stringify(value))
+    // console.log(JSON.stringify(`${value?.img}`))
     return (
         // width 400
         <Box height={100} sx={{ display: 'flex', flexDirection: 'row',alignItems:"center" }}>
@@ -31,7 +38,7 @@ export default function AccountSummaryCell(props: GridRenderCellParams<any, Acco
                 </Box>
             </Box>
             <Box>
-                <Link href={`/accounts/${value?.account_name}`}>
+                <Link href='/accounts/1'>
                     <DetailButton />
                 </Link>
             </Box>
