@@ -142,15 +142,15 @@ export async function POST(req:Request) {
 
     })
 
-    // console.log(JSON.stringify(reportResult.aggregations.affilateVideo.value))
-    const affilateVide:any = reportResult.aggregations?.affilateVide
+    console.log(JSON.stringify(reportResult.aggregations))
+    const affilateVide:any = reportResult.aggregations?.affilateVideo
     const affilateVideoPosted:any = reportResult.aggregations?.affilateVideoPosted
     const affilateLiveStreamCnt:any = reportResult.aggregations?.affilateLiveStreamCnt
-    accountReportResponse.affilateVideo = reportResult.aggregations?.affilateVideo ? affilateVide.value: 0;
-    accountReportResponse.affilateVideoPosted = reportResult.aggregations?.affilateVideoPosted ? affilateVideoPosted.value  : 0;
-    accountReportResponse.affilateLiveStreamCnt = reportResult.aggregations?.affilateLiveStreamCnt ? affilateLiveStreamCnt.value  : 0;
+    accountReportResponse.affilateVideo = reportResult.aggregations?.affilateVideo ? affilateVide.value!: 0;
+    accountReportResponse.affilateVideoPosted = reportResult.aggregations?.affilateVideoPosted ? affilateVideoPosted.value!  : 0;
+    accountReportResponse.affilateLiveStreamCnt = reportResult.aggregations?.affilateLiveStreamCnt ? affilateLiveStreamCnt.value!  : 0;
 
-
+    console.log('accountReportResponse:',JSON.stringify(accountReportResponse))
     return NextResponse.json({data:accountReportResponse});
     
 }
